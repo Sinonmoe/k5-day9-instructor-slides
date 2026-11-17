@@ -87,7 +87,7 @@ exit 1 — blocked: refund_amount_correct, pass_rate, …</pre>
   </figure>
 </div>
 <div class="facts">
-  <section><h2>Hình thức</h2><p>Overlay Lab 9 lên repo Lab 8, 0 API key (MockLLM + replay).</p></section>
+  <section><h2>Hình thức</h2><p>Bài cá nhân: fork Day 9 + chép <code>src/</code> gốc Day 8, 0 API key.</p></section>
   <section><h2>Chấm điểm</h2><p>100đ = Core 60 + Advanced 25 + Expert 15 (bonus +5).</p></section>
   <section><h2>Deadline</h2><p>{{DEADLINE}} (GMT+7).</p></section>
   <section><h2>Điều khiển</h2><p><kbd>←</kbd> <kbd>→</kbd> đổi slide, <kbd>N</kbd> ghi chú, <kbd>P</kbd> timer.</p></section>
@@ -98,40 +98,42 @@ exit 1 — blocked: refund_amount_correct, pass_rate, …</pre>
 <ul>
   <li>Lab 8 trả lời: "agent có chạy không?". Lab 9 trả lời: <strong>"làm sao biết bản mới tốt hơn — và chặn được bản tệ trước khi merge"</strong>.</li>
   <li>Không cần API key: dùng MockLLM trên 14 item × 5 seed cố định và judge replay. Không dùng Langfuse/OTel (học ở Day 14).</li>
-  <li>Không cần hoàn thiện Lab 8: toàn bộ M0–M4 chạy trên shape <code>swarm</code> (<code>lab8/shapes/swarm_reference.py</code>), miễn package <code>src/lab8/</code> còn nguyên.</li>
+  <li>Không cần bài nhóm Lab 8 làm xong: chép <code>src/</code> từ repo gốc Day 8 (<code>VinUni-AI20k/K5-Day8-From-Workflows-to-Agents</code>) vì Lab 9 chạy bản agent mẫu <code>swarm_reference.py</code> có sẵn.</li>
 </ul>
 """,
 )
 
 # 1 ── Format & Rules ────────────────────────────────────────────────────
 slide(
-    "Quy tắc & Cách cài đặt Overlay",
+    "Fork repo, cài đặt & bật GitHub Actions",
     """
-<h2 class="title">Chép overlay Lab 9 lên repo Lab 8 — khóa cứng src/lab8/</h2>
+<h2 class="title">Fork Day 9, chép src/ gốc Day 8 &amp; bật workflow ở tab Actions</h2>
 <div class="grid grid-2">
   <section class="panel">
-    <h3>3 bước cài đặt (M0)</h3>
+    <h3>Tên repo fork &amp; cài đặt (M0)</h3>
+<pre class="code code--wrap"><span class="c"># Đặt tên repo fork (L3A chiều / L3B buổi sáng):</span>
+K5-L3A-DAY09-HoVaTen-MSSV-EvaluationandFailureAnalysis
+K5-L3B-DAY09-HoVaTen-MSSV-EvaluationandFailureAnalysis</pre>
 <pre class="code">git switch -c starter/d09
-cp -R ../lab9-starter/src/. src/
-cp -R ../lab9-starter/docs/. docs/
-cp -R ../lab9-starter/.github/. .github/
-cd src && uv pip install -r requirements.txt -r requirements-lab9.txt
-python -m lab9.smoke && python -m lab9.evalset --build</pre>
-    <p><code>git status</code> chỉ thêm file mới ở <code>src/lab9/</code>, <code>tests/</code>, <code>config/</code>, <code>data/eval/</code>, <code>docs/</code>, <code>eval-gate.yml</code>.</p>
+<span class="c"># Chép src/ của repo gốc Day 8 (VinUni-AI20k/K5-Day8-From-Workflows-to-Agents)</span>
+<span class="c"># vào bản fork Day 9 (giữ nguyên src/lab9/, tests/, config/, data/eval/)</span>
+cd src &amp;&amp; uv pip install -r requirements.txt -r requirements-lab9.txt
+python -m lab9.smoke &amp;&amp; python -m lab9.evalset --build</pre>
+    <p>Trong bản fork, vào tab <b>Actions</b> bấm <b>bật workflow</b> (GitHub mặc định tắt ở repo fork; không bật thì <code>eval-gate</code> không chạy).</p>
   </section>
   <div class="stack">
     <section class="anti">
       <h3>{ICONS_ANTI}Cấm tuyệt đối (trừ điểm nặng)</h3>
       <ul>
-        <li><b>Sửa file trong <code>src/lab8/</code> (−10đ):</b> lỡ chép nhầm chạy <code>git restore src/lab8</code>.</li>
+        <li><b>Sửa file trong <code>src/lab8/</code> (−10đ):</b> chỉ dùng nguyên mẫu từ repo gốc Day 8.</li>
         <li><b>Sửa tay <code>reports/</code> (−20đ):</b> mọi report phải do <code>lab9.eval</code> sinh.</li>
         <li><b>Đặt nhãn inline trong item (−5đ):</b> nhãn tách riêng ở <code>labels_v1.json</code>.</li>
         <li><b>Nới ngưỡng cùng version (−10đ):</b> tuân thủ quy tắc ratchet.</li>
       </ul>
     </section>
     <section class="panel">
-      <h3>Không chép file gốc</h3>
-      <p>Không chép <code>README</code>, <code>CHECKPOINTS</code>, <code>RUBRIC</code>, <code>SUBMISSION</code>, <code>.gitignore</code> đè lên Lab 8.</p>
+      <h3>Nộp bài cá nhân</h3>
+      <p>Làm trên nhánh <code>starter/d09</code>, mở PR <code>starter/d09 → main</code> ngay trong bản fork, nộp link repo fork cá nhân.</p>
     </section>
   </div>
 </div>
@@ -139,7 +141,8 @@ python -m lab9.smoke && python -m lab9.evalset --build</pre>
     """
 <strong>Lưu ý giảng viên trong 10 phút đầu</strong>
 <ul>
-  <li>Nhắc sinh viên không chép đè <code>.gitignore</code> vì sẽ mất dòng chặn <code>.env</code> và <code>src/eval/instructor/</code> của Lab 8.</li>
+  <li>Repo gốc Day 8 để lấy <code>src/</code>: <code>https://github.com/VinUni-AI20k/K5-Day8-From-Workflows-to-Agents</code>. Khi chép <code>src/</code> vào bản fork Day 9, đảm bảo không ghi đè mất các file của Day 9.</li>
+  <li>Nhắc sinh viên vào tab <strong>Actions</strong> trên repo fork của mình để bấm bật workflow ngay từ đầu, tránh mở PR xong không thấy job <code>eval-gate</code> chạy.</li>
   <li>Trace không commit sẵn: <code>lab9.eval</code> chạy lại agent bằng MockLLM trên 14 item × 5 seed cố định nên luôn tái lập được cùng một trace.</li>
 </ul>
 """,
@@ -190,16 +193,16 @@ slide(
 <table class="data">
   <thead><tr><th>Giờ</th><th>Mốc</th><th>Việc chính</th><th>Lệnh kiểm tra</th></tr></thead>
   <tbody>
-    <tr><td class="num">13:30</td><td><b>M0</b></td><td>Overlay starter, cài gói, sinh eval set</td><td><code>python -m lab9.smoke</code></td></tr>
+    <tr><td class="num">13:30</td><td><b>M0</b></td><td>Fork Day 9, chép <code>src/</code> gốc Day 8, bật Actions</td><td><code>python -m lab9.smoke</code></td></tr>
     <tr><td class="num">13:45</td><td><b>M1</b></td><td>Taxonomy ≥5 FM từ trace; gắn <code>failure_modes</code></td><td><code>python -m lab9.evalset --check</code></td></tr>
     <tr><td class="num">14:30</td><td><b>M2</b></td><td>Judge calibration (κ, P/R, RG); audit ≥5 case</td><td><code>python -m lab9.judge --audit 5</code></td></tr>
     <tr><td class="num">15:15</td><td><b>M3</b></td><td>Trajectory graders + metric FM-08 + trace case</td><td><code>pytest -k "lab9 and not advanced"</code></td></tr>
     <tr><td class="num">16:00</td><td><b>M4</b></td><td>Paired bootstrap + CI gate chặn regression</td><td><code>python -m lab9.gate ...</code></td></tr>
-    <tr class="row-key"><td class="num">16:45</td><td><b>PR</b></td><td>Eval card + PRD v1.1 + <code>harness_map.yaml</code>; mở PR</td><td>Job <code>eval-gate</code> xanh</td></tr>
+    <tr class="row-key"><td class="num">16:45</td><td><b>PR</b></td><td>Eval card + PRD v1.1; mở PR trong bản fork</td><td>Job <code>eval-gate</code> xanh</td></tr>
     <tr><td class="num">Sau 17:00</td><td><b>M5–M7</b></td><td>Eval v2 + slice gate + A/A <code>pass^5</code> + anti-gaming traps</td><td><code>lab9.mutation</code> &amp; <code>lab9.traps</code></td></tr>
   </tbody>
 </table>
-<p class="note">Deadline nộp commit cuối trên PR (<code>starter/d09</code> → <code>main</code>): {{DEADLINE}}.</p>
+<p class="note">Deadline nộp link repo fork cá nhân (PR <code>starter/d09</code> → <code>main</code>): {{DEADLINE}}.</p>
 """,
     """
 <strong>Điều phối thời gian</strong>
@@ -399,12 +402,12 @@ python -m lab9.gate --pr reports/eval_seeded_regression.json --baseline reports/
   </div>
   <div class="stack">
     {coach(
-        "<b>Đồng bộ CI (<code>eval-gate.yml</code>):</b> nhớ <code>git add -f reports/baseline_v1.json</code> và thêm section <code>eval</code> vào <code>harness_map.yaml</code> (v1.2).",
+        "<b>Đồng bộ CI (<code>eval-gate.yml</code>):</b> nhớ <code>git add -f reports/baseline_v1.json</code>, thêm section <code>eval</code> vào <code>harness_map.yaml</code> và bật workflow ở tab <b>Actions</b>.",
         "<b>Eval Card &amp; PRD v1.1:</b> mọi con số phải trích từ report có <code>run_id</code>, nêu rõ giới hạn (MockLLM, 14 item, judge replay).",
     )}
     {anti(
         "Sinh <code>baseline_v1.json</code> từ shape <code>fixed</code> thay vì <code>swarm</code> (<code>ci_check</code> sẽ báo lỗi).",
-        "Quên dán output <code>exit 1</code> của <code>seeded_regression</code> vào mô tả PR.",
+        "Quên bật workflow ở tab <b>Actions</b> trên repo fork hoặc quên dán output <code>exit 1</code> của <code>seeded_regression</code> vào PR.",
     )}
     {check("<code>lab9.ci_check</code> trả exit 0 và job <code>eval-gate</code> trên PR xanh chưa?")}
   </div>
@@ -513,27 +516,28 @@ slide(
 slide(
     "Checklist nộp bài trước 23:59",
     """
-<h2 class="title">PR từ starter/d09 → main trước 23:59</h2>
+<h2 class="title">PR starter/d09 → main trong repo fork cá nhân trước 23:59</h2>
 <div class="grid grid-2">
   <section class="panel">
     <h3>Core (trên lớp)</h3>
     <ul>
+      <li>Repo fork đặt tên <code>K5-L3A/L3B-DAY09-HoVaTen-MSSV-EvaluationandFailureAnalysis</code></li>
+      <li>Đã bật workflow ở tab <b>Actions</b> trên bản fork; job <code>eval-gate</code> xanh</li>
       <li><code>src/lab9/{stats,graders,evalset}.py</code> hoàn thành TODO M1–M4</li>
       <li><code>eval_set_v1.jsonl</code> có <code>failure_modes</code>, <code>labels_v1.json</code> tách riêng</li>
-      <li><code>docs/{failure_taxonomy,trace_case,judge_audit,eval_card,PRD_v1.1}.md</code></li>
-      <li><code>reports/{baseline_v1,eval_fixed,eval_seeded_regression}.json</code></li>
-      <li><code>harness_map.yaml</code> có section <code>eval</code>; job <code>eval-gate</code> xanh</li>
-      <li>Dán output gate exit 1 của <code>seeded_regression</code> vào mô tả PR</li>
+      <li><code>docs/{failure_taxonomy,trace_case,judge_audit,eval_card,PRD_v1.1}.md</code> &amp; <code>harness_map.yaml</code></li>
+      <li><code>reports/{baseline_v1,eval_fixed,eval_seeded_regression}.json</code> + dán output <code>exit 1</code> vào mô tả PR</li>
     </ul>
   </section>
   <section class="panel">
-    <h3>Advanced / Expert (tới 23:59)</h3>
+    <h3>Advanced / Expert &amp; Nộp link</h3>
     <ul>
       <li><code>fm_map.yaml</code>, <code>metric_spec_v2.yaml</code>, <code>pass_at_k/hat_k</code>, <code>slice_check</code>, <code>integrity_check</code></li>
       <li><code>eval_set_v2.jsonl</code> + <code>labels_v2.json</code> (<code>evalset --v2 --build</code>)</li>
       <li><code>reports/baseline_v2.json</code> → job <code>eval-gate-v2</code> xanh</li>
       <li><code>docs/eval_card.md</code> bổ sung mục v2 (A/A, slices, giới hạn 5 seed)</li>
       <li>Dán output <code>lab9.mutation</code> (scorecard + <code>--aa</code>) và 4 dòng <code>exit 1</code> của traps vào PR</li>
+      <li><b>Nộp bài:</b> gửi link repo fork Day 9 của cá nhân (có PR <code>starter/d09 → main</code>)</li>
     </ul>
   </section>
 </div>
