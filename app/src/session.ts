@@ -12,8 +12,8 @@ export type Session = 'morning' | 'afternoon'
 /** Hour (local time) from which the deck opens as the afternoon class. */
 export const AFTERNOON_FROM_HOUR = 13
 
-/** Morning class = afternoon schedule moved this many hours earlier (13:30 to 08:30). */
-export const MORNING_SHIFT_HOURS = -5
+/** Morning class = afternoon schedule moved 4h30m earlier (13:30 to 09:00). */
+export const MORNING_SHIFT_MINUTES = -270
 
 const AFTERNOON_START = '13:30'
 const AFTERNOON_END = '17:00'
@@ -58,16 +58,19 @@ export function clearSessionInUrl() {
   window.history.replaceState(null, '', url)
 }
 
-function shiftTime(hhmm: string, hours: number) {
+function shiftTime(hhmm: string, deltaMinutes: number) {
   const [h, m] = hhmm.split(':').map(Number)
-  return `${String(h + hours).padStart(2, '0')}:${String(m).padStart(2, '0')}`
+  const total = h * 60 + m + deltaMinutes
+  const nh = Math.floor(total / 60)
+  const nm = total % 60
+  return `${String(nh).padStart(2, '0')}:${String(nm).padStart(2, '0')}`
 }
 
 const TIME_RE = /\b(1[3-8]):([0-5]\d)\b/g
 
 /** Localize slide HTML or a title for a session. */
 export function localize(text: string, session: Session): string {
-  const shift = session === 'morning' ? MORNING_SHIFT_HOURS : 0
+  const shift = session === 'morning' ? MORNING_SHIFT_MINUTES : 0
   const range = `${shiftTime(AFTERNOON_START, shift)} đến ${shiftTime(AFTERNOON_END, shift)}`
   let out = text
     .replaceAll('{{SESSION}}', SESSION_LABEL[session])

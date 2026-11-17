@@ -37,12 +37,12 @@ npm run build
 
 Deck tự chọn ca theo giờ máy lúc mở trang, và không tự đổi giữa buổi:
 
-- Mở trước 13:00: **lớp sáng**, 08:30 đến 12:00.
+- Mở trước 13:00: **lớp sáng**, 09:00 đến 12:30.
 - Mở từ 13:00: **lớp chiều**, 13:30 đến 17:00 (giờ gốc trong README lab; phần Advanced/Expert làm tiếp tới 23:59).
 
-Lớp sáng dùng cùng lịch, dời sớm 5 tiếng: mọi mốc giờ trên slide và trong ghi chú tự đổi. Nút ca trên header đổi tay và ghi vào link (`?ca=sang` hoặc `?ca=chieu`) để reload hay chia sẻ vẫn giữ đúng ca.
+Lớp sáng dùng cùng lịch, dời sớm 4 tiếng 30 phút: mọi mốc giờ trên slide và trong ghi chú tự đổi. Nút ca trên header đổi tay và ghi vào link (`?ca=sang` hoặc `?ca=chieu`) để reload hay chia sẻ vẫn giữ đúng ca.
 
-Lớp sáng bắt đầu giờ khác thì sửa `MORNING_SHIFT_HOURS` trong `app/src/session.ts`.
+Lớp sáng bắt đầu giờ khác thì sửa `MORNING_SHIFT_MINUTES` trong `app/src/session.ts`.
 
 ## Phím tắt
 
