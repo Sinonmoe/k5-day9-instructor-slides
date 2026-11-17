@@ -16,17 +16,17 @@ export const AFTERNOON_FROM_HOUR = 13
 export const MORNING_SHIFT_HOURS = -5
 
 const AFTERNOON_START = '13:30'
-const AFTERNOON_END = '17:30'
+const AFTERNOON_END = '17:00'
 
 export const SESSION_LABEL: Record<Session, string> = {
   morning: 'Lớp sáng',
   afternoon: 'Lớp chiều',
 }
 
-/** Submission deadline (GMT+7) per class: morning same night, afternoon next morning. */
+/** Submission deadline (GMT+7) per class: same night 23:59. */
 export const DEADLINE: Record<Session, string> = {
-  morning: '23h59 ngày lab',
-  afternoon: '11h59 sáng hôm sau',
+  morning: '23h59 cùng ngày',
+  afternoon: '23h59 cùng ngày',
 }
 
 const PARAM = 'ca'

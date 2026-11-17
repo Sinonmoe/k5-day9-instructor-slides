@@ -44,11 +44,11 @@ type SlideData = {
 const rawSlideData = rawSlides as SlideData[]
 const CP_LIST = ['1', '2', '3', '4', '5'] as const
 const CP_NAMES: Record<string, string> = {
-  '1': 'Setup và v0',
-  '2': 'v1 đến v3',
-  '3': 'Tool và test',
-  '4': 'Eval 10 case',
-  '5': 'UI và report',
+  '1': 'M0–M1 Taxonomy',
+  '2': 'M2 Judge Audit',
+  '3': 'M3 Trajectory',
+  '4': 'M4 CI Gate',
+  '5': 'M5–M7 Advanced',
 }
 
 function formatTime(totalSec: number) {
@@ -354,7 +354,7 @@ export default function App() {
           />
           <div className="brand-text">
             <span className="brand-course">AI Thực Chiến, K5 Level 3</span>
-            <span className="brand-day">Day 03: Prompt Engineering và Tool Calling</span>
+            <span className="brand-day">Day 09: Evaluation &amp; Failure Analysis</span>
           </div>
         </div>
 
