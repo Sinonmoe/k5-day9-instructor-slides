@@ -103,7 +103,41 @@ exit 1 — blocked: refund_amount_correct, pass_rate, …</pre>
 """,
 )
 
-# 1 ── Format & Rules ────────────────────────────────────────────────────
+# 1 ── Wireframe quy trình toàn bài lab ─────────────────────────────────
+slide(
+    "Wireframe quy trình toàn bài Lab Day 09",
+    """
+<h2 class="title">Bức tranh tổng thể: từ Fork → Eval → CI Gate → PR</h2>
+<p class="lede">Sáu chặng nối tiếp nhau thành một pipeline đánh giá hoàn chỉnh (Core M0–M4, mở rộng M5–M7).</p>
+<ol class="loop">
+  <li><b>M0 · Dựng khung &amp; Actions</b><span>Fork Day 9 + chép <code>src/</code> gốc Day 8 → nhánh <code>starter/d09</code>, bật <b>Actions</b>, chạy <code>lab9.smoke</code>.</span></li>
+  <li><b>M1 · Trace → Taxonomy</b><span>Đọc trace <code>lab9.trace_case</code> → viết <code>failure_taxonomy.md</code>, gắn <code>failure_modes</code> (nhãn tách ở <code>labels_v1.json</code>).</span></li>
+  <li><b>M2 · Judge-the-Judge</b><span>Cài <code>stats.py</code> (κ, P/R, RG) → giữ <code>tone_ok</code>, loại <code>helpful</code>, audit ≥5 bất đồng.</span></li>
+  <li><b>M3 · Trajectory Graders</b><span>Code grader tiền/approval + metric <code>FM-08</code> → <code>--detect</code> ≥80% và viết regression test.</span></li>
+  <li><b>M4 · Bootstrap &amp; CI Gate</b><span>Sinh <code>baseline_v1.json</code> (<code>swarm</code>) → <code>fixed</code> merge (exit 0), <code>seeded_regression</code> bị chặn (exit 1).</span></li>
+  <li><b>M5–M7 · Hardening &amp; PR</b><span>Eval v2 + slice gate, <code>pass_hat_5</code> ngoài nhiễu A/A, <code>integrity_check</code> chặn trap → PR <code>starter/d09 → main</code>.</span></li>
+</ol>
+<div class="grid grid-2">
+  <section class="panel">
+    <h3>Luồng dữ liệu &amp; Gate</h3>
+    <p><code>public_claims</code> + <code>MockLLM</code> → <code>lab9.eval</code> → <code>reports/*.json</code> → <code>lab9.gate</code> (so với <code>baseline</code> + <code>metric_spec</code>) → <b>exit 0 / exit 1</b>.</p>
+  </section>
+  <section class="panel">
+    <h3>Tài liệu đi kèm PR</h3>
+    <p><code>failure_taxonomy.md</code> · <code>judge_audit.md</code> · <code>trace_case.md</code> · <code>eval_card.md</code> · <code>PRD_v1.1.md</code> · <code>harness_map.yaml</code>.</p>
+  </section>
+</div>
+""",
+    """
+<strong>Dùng slide wireframe này để định hướng toàn buổi</strong>
+<ul>
+  <li>Giúp sinh viên thấy rõ từng bước không rời rạc: M1 tìm lỗi từ trace, M2 kiểm định judge, M3 viết code grader bắt lỗi, M4 đóng gói thành cổng chặn CI tự động, M5–M7 bịt lỗ hổng (slice nhỏ, agent chập chờn, gian lận report).</li>
+  <li>Nhắc lại: toàn bộ bài làm nằm trên nhánh <code>starter/d09</code> trong repo fork Day 9 của cá nhân và mở PR về <code>main</code> ngay trong bản fork đó.</li>
+</ul>
+""",
+)
+
+# 2 ── Format & Rules ────────────────────────────────────────────────────
 slide(
     "Fork repo, cài đặt & bật GitHub Actions",
     """
